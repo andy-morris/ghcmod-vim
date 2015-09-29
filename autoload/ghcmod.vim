@@ -299,8 +299,9 @@ function! s:system(type, args) "{{{
     let l:proc = s:plineopen3([{'args': a:args,  'fd': { 'stdin': '', 'stdout': l:tmpfile, 'stderr': '' }}])
     let [l:cond, l:status] = ghcmod#util#wait(l:proc)
     let l:tries = 1
+    let l:max_tries = exists('g:ghcmod_timeout')? 10 * g:ghcmod_timeout : 50
     while l:cond ==# 'run'
-      if l:tries >= 50
+      if l:max_tries > 0 && l:tries >= l:max_tries
         call l:proc.kill(15)  " SIGTERM
         call l:proc.waitpid()
         throw printf('ghcmod#make: `ghc-mod %s` takes too long time!', a:type)

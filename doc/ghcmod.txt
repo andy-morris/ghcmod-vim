@@ -233,6 +233,12 @@ g:ghcmod_open_quickfix_function              *g:ghcmod_open_quickfix_function*
 	  CtrlPQuickfix
 	endfunction
 <
+g:ghcmod_timeout					    *g:ghcmod_timeout*
+	Timeout for each run of ghc-mod.
+
+	The maximum amount of time, in seconds, that ghc-mod will be allowed
+	to run each time before being killed. If set to zero, then it will be
+	allowed to run indefinitely. The default is five seconds.
 ==============================================================================
 CUSTOMIZE                                                   *ghcmod-customize*
 
